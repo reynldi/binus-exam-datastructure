@@ -1,0 +1,73 @@
+@startuml
+' Diagram Kelas Sistem Pemesanan Tiket Transportasi
+' Implementasi konsep Object-Oriented Programming (OOP)
+
+abstract class Transportation {
+  ' ENCAPSULATION: Data member bersifat private untuk keamanan data
+  - id : String
+  - name : String
+  - type : String
+  + Transportation(id: String, name: String, type: String)
+  + {abstract} getTotalCapacity() : int
+  + getInfo() : String
+  + getId() : String
+  + getName() : String
+  + getType() : String
+}
+
+class Bus extends Transportation {
+  ' ENCAPSULATION: Data member bersifat private
+  - seatCapacity : int
+  + Bus(id: String, name: String, type: String, seatCapacity: int)
+  + getTotalCapacity() : int
+  + getSeatCapacity() : int
+}
+
+class Train extends Transportation {
+  ' ENCAPSULATION: Data member bersifat private
+  - numberOfCarriages : int
+  - capacityPerCarriage : int
+  + Train(id: String, name: String, type: String, numberOfCarriages: int, capacityPerCarriage: int)
+  + getTotalCapacity() : int
+  + getNumberOfCarriages() : int
+  + getCapacityPerCarriage() : int
+}
+
+class TransportationManager {
+  ' ENCAPSULATION: ArrayList untuk menyimpan data transportasi
+  - transportations : ArrayList<Transportation>
+  - scanner : Scanner
+  - nextId : int
+  + TransportationManager()
+  + showMainMenu() : void
+  - addTransportation() : void
+  - addBus() : void
+  - addTrain() : void
+  - displayTransportations() : void
+}
+
+class Main {
+  ' Entry point aplikasi
+  + main(args: String[]) : void
+}
+
+' Hubungan antar kelas (Relationships)
+Transportation <|-- Bus : "INHERITANCE\nBus mewarisi Transportation"
+Transportation <|-- Train : "INHERITANCE\nTrain mewarisi Transportation"
+Main --> TransportationManager : "Membuat instance\nTransportationManager"
+TransportationManager --> Transportation : "Menggunakan\npolymorphism"
+TransportationManager --> Bus : "Membuat objek\nBus"
+TransportationManager --> Train : "Membuat objek\nTrain"
+
+' Catatan penjelasan konsep OOP
+note right of Transportation : "Kelas abstrak Transportation\nImplementasi konsep:\n• ABSTRACTION \n• INHERITANCE \n• ENCAPSULATION "
+
+note right of TransportationManager : "Kelas TransportationManager\nImplementasi konsep:\n• ENCAPSULATION \n• POLYMORPHISM \n• Mengelola sistem transportasi"
+
+note right of Bus : "Kelas Bus\n• Mewarisi Transportation\n• Override method\n  getTotalCapacity()\n• Implementasi POLYMORPHISM"
+
+note right of Train : "Kelas Train\n• Mewarisi Transportation\n• Override method\n  getTotalCapacity()\n• Implementasi POLYMORPHISM"
+
+' Judul diagram
+title "Diagram Kelas Sistem Pemesanan Tiket Transportasi\nImplementasi Konsep Object-Oriented Programming (OOP)"
+@enduml
